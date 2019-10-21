@@ -11,7 +11,7 @@ int    my_str_isnum(char const *str)
     int number = 0;
 
     while (str[letter] != '\0') {
-        if ((str[letter] >= '0') && (str[letter] <= '9')) {
+        if (str[letter] >= '0' && str[letter] <= '9') {
             number = number  + 1;
         }
         letter = letter + 1;
