@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char    *calc_str(char *str, char *cpy, char *result)
+char    *calc_str(char *str, char *str2, char *cpy, char *result)
 {
     int len = (my_strlen(str) - 1);
     int letter = 0;
@@ -53,7 +53,7 @@ char    *create_my_cpy(char *str, char *str2, char *cpy, char *result)
         }
         cpy[letter] = '\0';
         my_revstr(cpy);
-        return (calc_str(str, cpy, result));
+        return (calc_str(str, str2, cpy, result));
     } else {
         while (str[letter]) {
             cpy[letter] = str[letter];
@@ -65,7 +65,7 @@ char    *create_my_cpy(char *str, char *str2, char *cpy, char *result)
         }
         cpy[letter] = '\0';
         my_revstr(cpy);
-        return (calc_str(str2, cpy, result));
+        return (calc_str(str2, str, cpy, result));
     }
 }
 
@@ -78,13 +78,13 @@ char    *my_infin_add(char *str, char *str2)
 
     if (str_len > str2_len) {
         cpy = malloc(sizeof(char) * (str_len + 1));
-        result = malloc(sizeof(char) * (str_len + 2));
+        result = malloc(sizeof(char) * (str_len + 3));
         my_revstr(str2);
         cpy = create_my_cpy(str, str2, cpy, result);
         return (result);
     } else {
         cpy = malloc(sizeof(char) * (str2_len + 1));
-        result = malloc(sizeof(char) * (str2_len + 2));
+        result = malloc(sizeof(char) * (str2_len + 3));
         my_revstr(str);
         cpy = create_my_cpy(str, str2, cpy, result);
         return (result);
