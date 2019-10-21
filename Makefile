@@ -7,6 +7,8 @@
 
 SRC	=	*.c	\
 
+NAME	=	infin_add
+
 OBJ	=	libmy.a
 
 all	:	$(OBJ)
@@ -14,11 +16,12 @@ all	:	$(OBJ)
 $(OBJ)	:
 	gcc -c lib/my/$(SRC)
 	ar rc $(OBJ) *.o
+	gcc -o $(NAME) infin_add.c -L. -lmy -I include
 
 clean	:
-	rm -f *.o
+	rm -f *.o $(OBJ)
 
 fclean	: clean
-	rm -f $(OBJ)
+	rm -f $(NAME)
 
 re	: fclean all

@@ -9,81 +9,83 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char    *complete_str(char const *str, char const str2, char *dest, int letter)
+char    *complete_str(char *str, char *str2, char *dest, int cursor)
 {
-    int res = (my_strlen(str) - letter);
-    int res2 = (my_strlen(str2) - letter);
+    int str_len = my_strlen(str);
+    int str2_len = my_strlen(str2);
 
-    if (letter == my_strlen(str)) {
-        while (res2 > 0) {
-            dest[letter] = str2[res2];
-            letter += 1;
-            res2 += -1;
+    if (str_len > str2_len) {
+        while (cursor > 0) {
+        dest[cursor] = str[cursor];
         }
+        cursor += -1;
     } else {
-        while (res > 0) {
-            dest[letter] = str[res];
-            letter += 1;
-            res += -1;
+        while (cursor > 0) {
+            dest[cursor] = str2[cursor];
         }
+        cursor += -1;
     }
-    my_revstr(dest);
     return (dest);
 }
 
-char    *my_calc(char const *str, char const *str2, char *dest, int len)
+char    *my_calc(char *str, char *str2, char *dest, int len)
 {
-    int letter = 0;
-    char c = ((str[len] + str2[len]) - 96);
+    int str_len = my_strlen(str);
+    int str2_len = my_strlen(str2);
 
-    while (len > 0) {
-        if (c > 10) {
-            dest[letter] = (c % 10 + '0');
-            len += -1;
-            letter += 1;
-            str[len - 1] += 1;
-
+    while ((str_len >= 0) && (str2_len >= 0)) {
+        if (((str[str_len] + str2[str2_len]) - 48) > '9') {
+            dest[len] = (((str[str_len] + str2[str2_len]) - 48) % 10 + '0');
+            if (str_len > str2_len) {
+                str[str_len - 1] == (str[str_len - 1] + 1);
+            } else {
+                str2[str2_len - 1] == (str2[str2_len - 1] + 1);
+            }
         } else {
-            dest[letter] = c;
-            len += -1;
-            letter += 1;
+            dest[len] = ((str[str_len] + str2[str2_len]) - 48);
         }
+        len += -1;
+        str_len += -1;
+        str2_len += -1;
     }
-    return (complete_str(str, str2, dest, letter));
+    return (complete_str(str, str2, dest, len));
 }
 
 char    *my_infin_add(char *str, char *str2)
 {
-    int len1 = (my_strlen(str) + 2);
-    int len2 = (my_strlen(str2) + 2);
-    char dest[];
+    char *dest;
+    int str_len = my_strlen(str);
+    int str2_len = my_strlen(str2);
 
-    if (len1 > len2) {
-        dest = malloc(sizeof(char) * len1);
-        dest[len1] = '\0';
-        my_calc(str, str2, dest, len2);
+    if (str_len > str2_len) {
+        dest = malloc(sizeof(char) * (str_len + 2));
+        dest[str_len + 2] = '\0';
+        my_calc(str, str2, dest, (str_len + 1));
         return (dest);
     } else {
-        dest = malloc(sizeof(char) * len2);
-        dest[len2] = '\0';
-        my_calc(str, str2, dest, len1);
+        dest = malloc(sizeof(char) * (str2_len + 2));
+        dest[str2_len + 2] = '\0';
+        my_calc(str, str2, dest, (str2_len + 1));
         return (dest);
     }
 }
 
 int    main(int argc, char *argv[])
 {
-    int num = my_str_isnum(argv[1]);
-    int num2 = my_str_isnum(argv[2]);
+    int num = 0;
+    int num2 = 0;
+    char *dest;
 
-    if (argc < 2 || argc > 3) {
+    if (argc < 3 || argc > 3) {
         write(2, "please, 2 arguments\n", 20);
         return (0);
     }
+    num = my_str_isnum(argv[1]);
+    num2 = my_str_isnum(argv[2]);
     if (num == 0 || num2 == 0) {
         write (2, "please, only numbers\n", 21);
         return (0);
     }
-    my_infin_add(argv[1], argv[2]);
-    return (0);
+    dest = my_infin_add(argv[1], argv[2]);
+    return (dest);
 }
