@@ -54,5 +54,9 @@ int    my_str_neg(char *str, char *str2);
 char    *my_infin_add_neg(char *str, char *str2);
 char    *my_delete_neg(char *str);
 int    my_str_is_negative(char *str);
+char    *my_str_delete_null(char *str);
+char    *my_cpy_without_null(char *str, char *cpy, int letter, int zero);
+char    *my_supr_null(char *str, char *cpy, int letter);
+char    *my_str_is_easy(char *str, char *cpy);
 
 #endif /* MY_H_ */

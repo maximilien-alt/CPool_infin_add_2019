@@ -91,13 +91,13 @@ char    *my_infin_add_neg(char *str, char *str2)
         str2 = my_delete_neg(str2);
         my_revstr(str2);
         cpy = create_my_cpy_neg(str2, cpy, result, str);
-        return (result);
+        return (my_str_delete_null(result));
     } else {
         cpy = malloc(sizeof(char) * (str_len2 + 1));
         result = malloc(sizeof(char) * (str_len2 + 3));
         str = my_delete_neg(str);
         my_revstr(str);
         cpy = create_my_cpy_neg(str, cpy, result, str2);
-        return (result);
+        return (my_str_delete_null(result));
     }
 }
