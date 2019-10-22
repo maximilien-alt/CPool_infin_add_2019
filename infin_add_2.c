@@ -49,7 +49,7 @@ char    *my_calc_str_neg(char *str, char *cpy, char *result, int neg)
         letter += 1;
         str_len += -1;
     }
-    if (neg == 1) {
+    if (neg == 0) {
         result[letter] = '-';
         result[letter + 1] = '\0';
     } else

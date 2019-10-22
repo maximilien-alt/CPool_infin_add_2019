@@ -52,5 +52,7 @@ int    my_word_number(char const *str);
 char   **my_word_in_tab(char const *str, char *const *tab);
 int    my_str_neg(char *str, char *str2);
 char    *my_infin_add_neg(char *str, char *str2);
+char    *my_delete_neg(char *str);
+int    my_str_is_negative(char *str);
 
 #endif /* MY_H_ */
