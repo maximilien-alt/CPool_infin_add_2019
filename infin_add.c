@@ -45,21 +45,14 @@ char    *my_calc_str(char *str, char *cpy, char *result, int letter)
 char    *create_my_cpy(char *str, char *cpy, char *result, char *str2)
 {
     int letter = 0;
-    int neg = 0;
-    int i = 0;
 
-    while (str[letter] && str[letter] != '-') {
+    while (str[letter]) {
         cpy[letter] = str[letter];
-        letter += 1;
-        i += 1;
-    }
-    while ((str[letter] == '-' && str[letter])) {
         letter += 1;
     }
     while (str2[letter]) {
-        cpy[i] = '0';
+        cpy[letter] = '0';
         letter += 1;
-        i += 1;
     }
     cpy[letter] = '\0';
     my_revstr(cpy);
@@ -102,12 +95,12 @@ int    main(int argc, char *argv[])
         return (84);
     av1_num = my_str_is_negative(argv[1]);
     av2_num = my_str_is_negative(argv[2]);
-    if (av1_num == 1 || av2_num == 1) {
+    if (av1_num == 1 || av2_num == 1)
         result = my_infin_add_neg(argv[1], argv[2]);
-    } else {
+    else
         result = my_infin_add(argv[1], argv[2]);
-    }
     my_putstr(result);
+    my_putchar('\n');
     free(result);
     return (0);
 }
