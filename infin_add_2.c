@@ -9,6 +9,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+char    *my_disp_neg(char *result, int letter, int neg)
+{
+    if (neg == 1) {
+        result[letter] = '-';
+        result[letter + 1] = '\0';
+    } else {
+        result[letter] = '\0';
+    }
+    return (result);
+}
 
 char    *my_delete_neg(char *str)
 {
@@ -37,23 +47,22 @@ char    *my_calc_str_neg(char *str, char *cpy, char *result, int neg)
     int str_len = my_strlen(str) - 1;
     int letter = 0;
 
-    while (str_len >= 0) {
+    while (str_len > 0) {
         if ((str[str_len] - cpy[str_len] + '0') >= '0') {
             result[letter] = str[str_len] - cpy[str_len] + '0';
         } else {
-            result[letter] = ((cpy[str_len] - str[str_len]) + '0');
-            str[str_len - 1] += -1;
-            if (str[str_len - 1] < '0')
-                str[str_len - 1] = '9';
+            result[letter] = (((str[str_len] + 10)- cpy[str_len]) + '0');
+            cpy[str_len - 1] += 1;
         }
         letter += 1;
         str_len += -1;
     }
-    if (neg == 0) {
-        result[letter] = '-';
-        result[letter + 1] = '\0';
-    } else
-        result[letter] = '\0';
+    if ((str[str_len] - cpy[str_len] + '0') >= '0') {
+        result[letter] = str[str_len] - cpy[str_len] + '0';
+    } else {
+        result[letter] = '0';
+    }
+    my_disp_neg(result, letter + 1, neg);
     return (my_revstr(result));
 }
 
