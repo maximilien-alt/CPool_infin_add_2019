@@ -5,9 +5,17 @@
 ** infin_add_2.c
 */
 
-#include "my.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "my.h"
+
+int    my_str_is_negative(char *str)
+{
+    if (str[0] == '-') {
+        return (1);
+    }
+    return (0);
+}
 
 char    *my_calc_str(char *str, char *cpy, char *result, int letter)
 {
@@ -37,14 +45,21 @@ char    *my_calc_str(char *str, char *cpy, char *result, int letter)
 char    *create_my_cpy(char *str, char *cpy, char *result, char *str2)
 {
     int letter = 0;
+    int neg = 0;
+    int i = 0;
 
-    while (str[letter]) {
+    while (str[letter] && str[letter] != '-') {
         cpy[letter] = str[letter];
+        letter += 1;
+        i += 1;
+    }
+    while ((str[letter] == '-' && str[letter])) {
         letter += 1;
     }
     while (str2[letter]) {
-        cpy[letter] = '0';
+        cpy[i] = '0';
         letter += 1;
+        i += 1;
     }
     cpy[letter] = '\0';
     my_revstr(cpy);
@@ -79,17 +94,19 @@ int    main(int argc, char *argv[])
     int av2_num = 0;
     char *result;
 
-    if (argc < 3 || argc > 3) {
-        write (2, "please, 2 arguments\n", 20);
-        return (0);
-    }
+    if (argc < 3 || argc > 3)
+        return (84);
     av1_num = my_str_isnum(argv[1]);
     av2_num = my_str_isnum(argv[2]);
-    if (av1_num == 0 || av2_num == 0) {
-        write (2, "please, only numbers\n", 21);
-        return (0);
+    if (av1_num == 0 || av2_num == 0)
+        return (84);
+    av1_num = my_str_is_negative(argv[1]);
+    av2_num = my_str_is_negative(argv[2]);
+    if (av1_num == 1 || av2_num == 1) {
+        result = my_infin_add_neg(argv[1], argv[2]);
+    } else {
+        result = my_infin_add(argv[1], argv[2]);
     }
-    result = my_infin_add(argv[1], argv[2]);
     my_putstr(result);
     free(result);
     return (0);

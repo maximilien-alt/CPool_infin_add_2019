@@ -16,7 +16,7 @@ all	:	$(OBJ)
 $(OBJ)	:
 	gcc -c lib/my/$(SRC)
 	ar rc $(OBJ) *.o
-	gcc -o $(NAME) -g3 infin_add.c -L. -lmy -I include
+	gcc -o $(NAME) infin_add.c infin_add_2.c -L. -lmy -I include
 
 clean	:
 	rm -f *.o $(OBJ)

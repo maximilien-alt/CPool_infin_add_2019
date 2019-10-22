@@ -50,5 +50,7 @@ void    my_swap3(char const *dest, char const *src);
 void    **my_malloc_word(char const *str, char * const *tab);
 int    my_word_number(char const *str);
 char   **my_word_in_tab(char const *str, char *const *tab);
+int    my_str_neg(char *str, char *str2);
+char    *my_infin_add_neg(char *str, char *str2);
 
 #endif /* MY_H_ */
