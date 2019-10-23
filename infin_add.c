@@ -79,13 +79,13 @@ char    *my_infin_add(char *str, char *str2)
         result = malloc(sizeof(char) * (str_len + 3));
         my_revstr(str2);
         cpy = create_my_cpy(str2, cpy, result, str);
-        return (result);
+        return (my_str_delete_null(result));
     } else {
         cpy = malloc(sizeof(char) * (str_len2 + 1));
         result = malloc(sizeof(char) * (str_len2 + 3));
         my_revstr(str);
         cpy = create_my_cpy(str, cpy, result, str2);
-        return (result);
+        return (my_str_delete_null(result));
     }
 }
 

@@ -94,7 +94,7 @@ char    *my_infin_add_neg(char *str, char *str2)
     char *result;
     char *cpy;
 
-    if (str_len > str_len2) {
+    if (str_len >= str_len2) {
         cpy = malloc(sizeof(char) * (str_len + 1));
         result = malloc(sizeof(char) * (str_len + 3));
         str2 = my_delete_neg(str2);
